@@ -34,6 +34,25 @@ app.post('/api/mathematicians', async (req, res) => {
     res.json(newMathematician);                           // Return the saved mathematician
 });
 
+// server.js
+app.get('/api/mathematicians/:name', async (req, res) => {
+    try {
+        // Decode URL-encoded characters, replace dashes with spaces, and convert to lowercase
+        const normalizedName = decodeURIComponent(req.params.name)
+            .replace(/-/g, ' ')
+            .toLowerCase();
+
+        // Use a case-insensitive search in MongoDB
+        const mathematician = await Mathematician.findOne({ name: new RegExp(`^${normalizedName}$`, "i") });
+
+        if (!mathematician) return res.status(404).json({ message: "Mathematician not found" });
+
+        res.json(mathematician);
+    } catch (error) {
+        res.status(500).json({ message: "Error retrieving mathematician", error });
+    }
+});
+
 
 // Start the Server
 app.listen(PORT, () => {
