@@ -10,11 +10,26 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 const Chat = () => {
     const [query, setQuery] = React.useState('');
 
-    const handleQuerySubmit = () => {
-        console.log(query);
-        // Clear the input field
-        setQuery('');
-    }
+    const handleQuerySubmit = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query }),
+            });
+            setQuery('');
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message); // "Query received" from backend
+            } else {
+                console.error('Failed to send query');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
     return (
         <div style={{ backgroundColor: '#fffdfb', minHeight: '100vh' }}>
             <Grid2 container>
