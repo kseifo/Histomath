@@ -18,7 +18,7 @@ root.render(
         </Routes>
       </Router>
     </React.StrictMode>
-    <App />
+    {/* <App /> */}
 
   </div>
 
