@@ -20,9 +20,14 @@ app.post('/message', (req, res) => {
     generateCompletion(name,query);
 });
 
-app.get('/profile/:mathguy', (req,res) => {
+app.post('/profile/:mathguy', (req,res) => {
     name = req.params.mathguy;
-    res.send(`Hey {name}!`);
+    res.redirect(`http://localhost:3000/profile/${name}`);
+});
+
+app.post('/chat/:mathguy', (req,res) => {
+    name = req.params.mathguy;
+    res.redirect(`http://localhost:3000/chat/${name}`);
 });
 
 app.listen(PORT, () => {

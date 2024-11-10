@@ -15,28 +15,42 @@ import Khawarizmi from '../assets/khawarizmi.jpg';
 import Newton from '../assets/newton.jpg';
 import Gauss from '../assets/gauss.jpg';
 import Leibniz from '../assets/leibniz.jpg';
-
+import { useNavigate } from 'react-router-dom'
 const Home = () => {
-    const [query, setQuery] = React.useState('');
-
-    const handleProfileSubmit = async () => {
+    const navigate = useNavigate();
+    const handleProfileSubmit = async (profile) => {
         try {
-            const response = await fetch(`http://localhost:5000/profile/{query}`, {
-                method: 'GET',
+            const response = await fetch(`http://localhost:5000/profile/${profile}`, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ query }),
             });
-            setQuery('');
             if (response.ok) {
-                const data = await response.json();
-                console.log(data.message); // "Query received" from backend
+                navigate(`/profile/${profile}`);
             } else {
                 console.error('Failed to send query');
             }
         } catch (error) {
             console.error('Error:', error);
+        }
+    };
+
+    const handleChatSubmit = async (name) => {
+        try{
+            const response = await fetch(`http://localhost:5000/chat/${name}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if(response.ok){
+                navigate(`/chat/${name}`);
+            } else {
+                console.error('Failed to send query');
+            }
+        }catch(error){
+            console.error('Error: ', error);
         }
     };
 
@@ -88,8 +102,8 @@ const Home = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button sx={{ color: '#8f350d' }} size="small">Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small">Chat to Euler</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Leonhard-Euler'); }}>Learn More</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Leonhard-Euler'); }}>Chat to Euler</Button>
                         </CardActions>
                     </Card>
 
@@ -111,8 +125,8 @@ const Home = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button sx={{ color: '#8f350d' }} size="small">Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small">Chat to Euclid</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Euclid'); }}>Learn More</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Euclid'); }}>Chat to Euclid</Button>
                         </CardActions>
                     </Card>
                     {/* Khawarizmi */}
@@ -133,8 +147,8 @@ const Home = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button sx={{ color: '#8f350d' }} size="small">Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small" onClick={() => { setQuery('Khawarizmi'); handleProfileSubmit(); }}>Chat to Khawarizmi</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Muhammad-Al-Khwarizmi'); }}>Learn More</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Muhammad-Al-Khwarizmi'); }}>Chat to Khawarizmi</Button>
                         </CardActions>
                     </Card>
                 </Grid2>
@@ -159,8 +173,8 @@ const Home = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button sx={{ color: '#8f350d' }} size="small">Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small">Chat to Newton</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Isaac-Newton'); }}>Learn More</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Isaac-Newton'); }}>Chat to Newton</Button>
                         </CardActions>
                     </Card>
                     {/* Gauss */}
@@ -181,8 +195,8 @@ const Home = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button sx={{ color: '#8f350d' }} size="small">Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small">Chat to Gauss</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Carl-Friedrich-Gauss'); }}>Learn More</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Carl-Friedrich-Gauss'); }}>Chat to Gauss</Button>
                         </CardActions>
                     </Card>
                     {/* Leibniz */}
@@ -203,8 +217,8 @@ const Home = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button sx={{ color: '#8f350d' }} size="small">Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small">Chat to Leibniz</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Gottfried-Wilhelm-Leibniz'); }}>Learn More</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Gottfried-Wilhelm-Leibniz'); }}>Chat to Leibniz</Button>
                         </CardActions>
                     </Card>
                 </Grid2>
