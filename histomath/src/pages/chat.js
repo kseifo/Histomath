@@ -1,6 +1,6 @@
 // Home.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Appbar from '../components/Appbar';
 import { Grid2, Typography, TextField, IconButton } from '@mui/material';
@@ -22,7 +22,8 @@ import 'katex/dist/katex.min.css';
 const Chat = () => {
     const { name } = useParams();
     const [mathematician, setMathematician] = useState(null);
-    const [query, setQuery] = useState('');
+    const location = useLocation();
+    const [query, setQuery] = useState(location.state?.query || '');
     const [answer, setAnswer] = useState('');
     const [loading, setLoading] = useState(false);
 
