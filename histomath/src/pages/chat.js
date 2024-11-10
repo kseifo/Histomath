@@ -15,6 +15,7 @@ import Newton from '../assets/newton.jpg';
 import Leibniz from '../assets/leibniz.jpg';
 import Khawarizmi from '../assets/khawarizmi.jpg';
 
+import CircularProgress from '@mui/material/CircularProgress';
 import Latex from 'react-latex';
 import 'katex/dist/katex.min.css';
 
@@ -23,6 +24,7 @@ const Chat = () => {
     const [mathematician, setMathematician] = useState(null);
     const [query, setQuery] = useState('');
     const [answer, setAnswer] = useState('');
+    const [loading, setLoading] = useState(false);
 
     // Map of mathematician names to images
     const imageMap = {
@@ -51,6 +53,7 @@ const Chat = () => {
 
     const handleQuerySubmit = async () => {
         try {
+            setLoading(true);
             const response = await fetch('http://localhost:5001/message', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -65,6 +68,8 @@ const Chat = () => {
             }
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -77,15 +82,34 @@ const Chat = () => {
 
                 <Grid2 container size={12} spacing={3} sx={{ display: 'flex', minHeight: '100vh', padding: '2em' }}>
                     {/* Column 1: Image and Name */}
-                    <Grid2 item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding:'1em', borderRightColor: '#faede8'  }}>
+                    <Grid2 item size={4} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1em', borderRightColor: '#faede8' }}>
                         <img
                             src={mathematicianImage}
                             alt={mathematician?.name || "Mathematician"}
                             style={{ height: '350px', width: '350px', objectFit: 'cover', borderRadius: '100%' }}
                         />
-                        <Typography variant="h4" component="div" color='#8f350d' sx={{ fontWeight: 'bold', marginTop: '1em' }}>
+                        <Typography variant="h4" component="div" color='#8f350d' sx={{ fontWeight: 'bold', marginTop: '1em', textAlign: 'center' }}>
                             {mathematician?.name}
                         </Typography>
+
+                        {/* Show CircularProgress only if loading is true */}
+
+                        {loading && (
+                            <>
+                                <Typography
+                                    variant="h6"
+                                    component="div"
+                                    color="#8f350d"
+                                    sx={{marginTop: '1em', textAlign: 'center' }}
+                                >
+                                    {mathematician?.name} is thinking...
+                                </Typography>
+                                <CircularProgress
+                                    sx={{ color: '#ff5b12', mt: '1em' }}
+                                />
+                            </>
+                        )}
+
                     </Grid2>
 
                     {/* Column 2: Answer Text and Input Field */}
@@ -107,7 +131,7 @@ const Chat = () => {
                                 paddingRight: '1em'
                             }}
                         >
-                           <MarkdownRenderer content={answer} />
+                            <MarkdownRenderer content={answer} />
                         </Typography>
 
                         <Grid2 container size={12} spacing={1} sx={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -119,6 +143,7 @@ const Chat = () => {
                                     fullWidth
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
+                                    sx={{ marginTop: '1em' }}
                                 />
                             </Grid2>
                             <Grid2 item sx={{ display: 'flex', justifyContent: 'center', marginLeft: '0.5em' }}>
