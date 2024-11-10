@@ -7,27 +7,23 @@ dotenv.config();
 
 const app = express();
 const PORT = 5001;
-var name = "";
 // Middleware
 app.use(cors()); // Allow requests from different origins
 app.use(express.json()); // Parse JSON bodies
 
 // Example route
-app.post('/message', (req, res) => {
-    const query = req.body.query;
-    console.log('Received query:', query);
-    res.status(200).json({ message: 'Query received' });
-    generateCompletion(name,query);
+app.post('/message',async (req, res) => {
+    const {name, query} = req.body;
+    const ans = await generateCompletion(name,query);
+    res.status(200).json({answer: ans});
 });
 
 app.post('/profile/:mathguy', (req,res) => {
-    name = req.params.mathguy;
-    res.redirect(`http://localhost:3000/profile/${name}`);
+    res.redirect(`http://localhost:3000/profile/${req.params.mathguy}`);
 });
 
 app.post('/chat/:mathguy', (req,res) => {
-    name = req.params.mathguy;
-    res.redirect(`http://localhost:3000/chat/${name}`);
+    res.redirect(`http://localhost:3000/chat/${req.params.mathguy}`);
 });
 
 app.listen(PORT, () => {
@@ -38,18 +34,18 @@ app.listen(PORT, () => {
 const openai = new OpenAI({apiKey:process.env.OPEN_API_KEY});
 
 async function generateCompletion(name,message){
+
+    const userMsg = `You are ${name}. Answer in the perspective of him like you are talking to the one who asked and provide a solution that he wouldve done with the mathematical advancements in his time. Talk like you're talking to a student and explain each step well and go for the solution on a step by step basis. Answer/solve this: ` + message;
     const completion = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
-            { role: "system", content: "Answer like Euler, speak to the userand use the method that Euler would have used in order to solve the question." },
+            { role: "system", content: "You are acting like a mathematician. Be professional and concise." },
             {
                 role: "user",
-                content: "How do you solve sin(pi/5).",
+                content: userMsg,
             },
         ],
     });
-    console.log(completion.choices[0].message);
+    return completion.choices[0].message.content;
 
 };
-
-generateCompletion();

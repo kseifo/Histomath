@@ -1,5 +1,6 @@
 // Home.js
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Appbar from '../components/Appbar';
 import { Button, Grid, Grid2, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -8,21 +9,22 @@ import IconButton from "@mui/material/IconButton";
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 const Chat = () => {
+    const {name} = useParams();
     const [query, setQuery] = React.useState('');
-
+    const [answer, setAnswer] = React.useState('');
     const handleQuerySubmit = async () => {
         try {
-            const response = await fetch('http://localhost:5000/message', {
+            const response = await fetch('http://localhost:5001/message', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ query }),
+                body: JSON.stringify({ name: name, query: query}) 
             });
             setQuery('');
             if (response.ok) {
                 const data = await response.json();
-                console.log(data.message); // "Query received" from backend
+                setAnswer(data.answer);
             } else {
                 console.error('Failed to send query');
             }
@@ -42,8 +44,10 @@ const Chat = () => {
                 </Grid2>
 
                 {/* Text here */}
-                <Grid2 size={12} sx={{ display: 'flex', justifyContent: 'center', marginBottom:'3em' }}>
-                    <Typography variant="h4" sx={{ color: '#843b1b' }}>Ask a question</Typography>
+                <Grid2 size={12} sx={{ display: 'flex', justifyContent: 'center', marginBottom: '3em' }}>
+                    <Typography variant="h6" sx={{ color: '#843b1b' }}>
+                        {answer || "Ask a question"} {/* Display answer or default text */}
+                    </Typography>
                 </Grid2>
 
 

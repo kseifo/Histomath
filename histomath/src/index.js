@@ -15,7 +15,7 @@ root.render(
         <Routes>
           <Route path="/home" element={<Home />} />   {/* Home page route */}
           <Route path="/about" element={<About />} /> {/* About page route */}
-          <Route path="/chat" element={<Chat />} />   {/* Chat page route */}
+          <Route path="/chat/:name" element={<Chat />} />   {/* Chat page route */}
           <Route path="/profile/:name" element={<Profile />} /> {/* Dynamic profile route */}
         </Routes>
       </Router>
