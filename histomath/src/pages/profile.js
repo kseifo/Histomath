@@ -123,7 +123,7 @@ function Profile() {
                                         endIcon={<SendIcon />}
                                         onClick={() => handleChatRedirectRaw()}
                                     >
-                                        Chat to {mathematician.name}
+                                        Chat with {mathematician.name}
                                     </Button>
                                 </Grid2>
                             </Grid2>

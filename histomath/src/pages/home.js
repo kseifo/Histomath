@@ -103,7 +103,7 @@ const Home = () => {
                         </CardContent>
                         <CardActions>
                             <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Leonhard-Euler'); }}>Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Leonhard-Euler'); }}>Chat to Euler</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Leonhard-Euler'); }}>Chat with Euler</Button>
                         </CardActions>
                     </Card>
 
@@ -126,7 +126,7 @@ const Home = () => {
                         </CardContent>
                         <CardActions>
                             <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Euclid'); }}>Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Euclid'); }}>Chat to Euclid</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Euclid'); }}>Chat with Euclid</Button>
                         </CardActions>
                     </Card>
                     {/* Khawarizmi */}
@@ -148,7 +148,7 @@ const Home = () => {
                         </CardContent>
                         <CardActions>
                             <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Muhammad-Al-Khwarizmi'); }}>Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Muhammad-Al-Khwarizmi'); }}>Chat to Khawarizmi</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Muhammad-Al-Khwarizmi'); }}>Chat with Khawarizmi</Button>
                         </CardActions>
                     </Card>
                 </Grid2>
@@ -174,7 +174,7 @@ const Home = () => {
                         </CardContent>
                         <CardActions>
                             <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Isaac-Newton'); }}>Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Isaac-Newton'); }}>Chat to Newton</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Isaac-Newton'); }}>Chat with Newton</Button>
                         </CardActions>
                     </Card>
                     {/* Gauss */}
@@ -196,7 +196,7 @@ const Home = () => {
                         </CardContent>
                         <CardActions>
                             <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Carl-Friedrich-Gauss'); }}>Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Carl-Friedrich-Gauss'); }}>Chat to Gauss</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Carl-Friedrich-Gauss'); }}>Chat with Gauss</Button>
                         </CardActions>
                     </Card>
                     {/* Leibniz */}
@@ -218,7 +218,7 @@ const Home = () => {
                         </CardContent>
                         <CardActions>
                             <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleProfileSubmit('Gottfried-Wilhelm-Leibniz'); }}>Learn More</Button>
-                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Gottfried-Wilhelm-Leibniz'); }}>Chat to Leibniz</Button>
+                            <Button sx={{ color: '#8f350d' }} size="small"onClick={() => {handleChatSubmit('Gottfried-Wilhelm-Leibniz'); }}>Chat with Leibniz</Button>
                         </CardActions>
                     </Card>
                 </Grid2>
