@@ -20,7 +20,7 @@ const Home = () => {
     const navigate = useNavigate();
     const handleProfileSubmit = async (profile) => {
         try {
-            const response = await fetch(`http://localhost:5000/profile/${profile}`, {
+            const response = await fetch(`http://localhost:5001/profile/${profile}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const Home = () => {
 
     const handleChatSubmit = async (name) => {
         try{
-            const response = await fetch(`http://localhost:5000/chat/${name}`, {
+            const response = await fetch(`http://localhost:5001/chat/${name}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

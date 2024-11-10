@@ -6,7 +6,7 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const PORT = 5000;
+const PORT = 5001;
 var name = "";
 // Middleware
 app.use(cors()); // Allow requests from different origins
