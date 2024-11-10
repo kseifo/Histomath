@@ -1,6 +1,6 @@
 // src/pages/Profile.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Appbar from '../components/Appbar';
 import { Button, Grid2 } from '@mui/material';
@@ -17,6 +17,7 @@ import Khawarizmi from '../assets/khawarizmi.jpg';
 
 function Profile() {
     const { name } = useParams(); // Get the "name" from the URL
+    const navigate = useNavigate();
     const [mathematician, setMathematician] = useState(null);
     const [error, setError] = useState(null);
 
@@ -40,6 +41,14 @@ function Profile() {
                 setError("Mathematician not found"); // Handle error if not found
             });
     }, [name]);
+
+    const handleChatRedirect = (finding) => {
+        navigate(`/chat/${name}`, {state: {query: finding}});
+    };
+
+    const handleChatRedirectRaw = () => {
+        navigate(`/chat/${name}`);
+    };
 
     if (error) return <div>{error}</div>;
     if (!mathematician) return <div>Loading...</div>;
@@ -80,6 +89,7 @@ function Profile() {
                                     <Button
                                         variant="contained"
                                         sx={{ width: '200px', height: '80px', whiteSpace: 'normal', textAlign: 'center', backgroundColor:"#8f350d", textTransform: 'none', fontWeight: 'semi-bold'}}
+                                        onClick={() => handleChatRedirect(mathematician.finding1)}
                                     >
                                         {mathematician.finding1}
                                     </Button>
@@ -87,8 +97,8 @@ function Profile() {
                                 <Grid2 item xs={6} md={3} sx={{ display: 'flex', justifyContent: 'center' }}>
                                     <Button
                                         variant="contained"
-                                        
                                         sx={{ width: '200px', height: '80px', whiteSpace: 'normal', textAlign: 'center', backgroundColor:"#8f350d", textTransform: 'none', fontWeight: 'semi-bold' }}
+                                        onClick={() => handleChatRedirect(mathematician.finding2)}
                                     >
                                         {mathematician.finding2}
                                     </Button>
@@ -101,6 +111,7 @@ function Profile() {
                                     <Button
                                         variant="contained"
                                         sx={{ width: '200px', height: '80px', whiteSpace: 'normal', textAlign: 'center', backgroundColor:"#8f350d", textTransform: 'none', fontWeight: 'semi-bold'}}
+                                        onClick={() => handleChatRedirect(mathematician.finding3)}
                                     >
                                         {mathematician.finding3}
                                     </Button>
@@ -110,6 +121,7 @@ function Profile() {
                                         variant="contained"
                                         sx={{ width: '200px', height: '80px', whiteSpace: 'normal', textAlign: 'center', backgroundColor:"#d65f2b", textTransform: 'none', fontWeight: 'semi-bold'}}
                                         endIcon={<SendIcon />}
+                                        onClick={() => handleChatRedirectRaw()}
                                     >
                                         Chat to {mathematician.name}
                                     </Button>
