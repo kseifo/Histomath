@@ -1,7 +1,7 @@
 // Home.js
 import React from 'react';
 import Appbar from '../components/Appbar';
-import { Button, Grid, Grid2 } from '@mui/material';
+import { Button, Grid, Grid2, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from "@mui/material/IconButton";
@@ -40,6 +40,12 @@ const Chat = () => {
                 <Grid2 size={12}>
                     <h1>Chat Page Undergoing...</h1>
                 </Grid2>
+
+                {/* Text here */}
+                <Grid2 size={12} sx={{ display: 'flex', justifyContent: 'center', marginBottom:'3em' }}>
+                    <Typography variant="h4" sx={{ color: '#843b1b' }}>Ask a question</Typography>
+                </Grid2>
+
 
                 <Grid2 size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Grid2 size={6} sx={{ display: 'flex', justifyContent: 'center' }}>
