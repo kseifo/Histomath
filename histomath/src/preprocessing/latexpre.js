@@ -2,15 +2,31 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import 'katex/dist/katex.min.css'; // Import KaTeX styles for math rendering
+import rehypeMathjax from 'rehype-mathjax';
 
-const MarkdownRenderer = ({ content }) => (
-    <ReactMarkdown
-        children={content}
-        remarkPlugins={[remarkMath]}
-        rehypePlugins={[rehypeKatex]}
-    />
-);
+// Function to translate LaTeX delimiters to $ and $$
+const translateLaTex = (val) => {
+    if (val.indexOf("\\") === -1) return val;
+
+    return val
+        .replaceAll("\\(", "$")   // Inline math start
+        .replaceAll("\\)", "$")   // Inline math end
+        .replaceAll("\\[", "$$")  // Block math start
+        .replaceAll("\\]", "$$"); // Block math end
+};
+
+const MarkdownRenderer = ({ content }) => {
+    // Preprocess content with translateLaTex
+    const processedContent = translateLaTex(content);
+
+    return (
+        <ReactMarkdown
+            children={processedContent}
+            remarkPlugins={[remarkMath]}
+            rehypePlugins={[rehypeMathjax]}
+        />
+    );
+};
 
 export default MarkdownRenderer;
+
