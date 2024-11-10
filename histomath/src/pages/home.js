@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Euler from '../assets/euler.webp';
+import Euler from '../assets/euler.jpg';
 import Euclid from '../assets/euclid.jpg';
 import Khawarizmi from '../assets/khawarizmi.jpg';
 import Newton from '../assets/newton.jpg';
